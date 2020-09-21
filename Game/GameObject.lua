@@ -1,7 +1,12 @@
 GameObject = {}
 
 function GameObject:new(xPos, yPos)
-	local newObject = {x = xPos, y = yPos}
+	local newObject = {
+		position = {
+			x = xPos, 
+			y = yPos
+		}
+	}
 	local newObjectMt = {}
 
 	newObjectMt.__index = GameObject
@@ -16,9 +21,9 @@ function GameObject:Draw()
 	end
 	
 	if self.quad == nil then
-		love.graphics.draw(self.drawable, self.x, self.y)
+		love.graphics.draw(self.drawable, self.position.x, self.position.y)
 	else
-		love.graphics.draw(self.drawable, self.quad, self.x, self.y)
+		love.graphics.draw(self.drawable, self.quad, self.position.x, self.position.y)
 	end
 end
 
