@@ -1,4 +1,4 @@
-require("Game.game")
+require("Source.game")
 
 function love.load(args)
 	local loadStart = love.timer.getTime()
@@ -9,6 +9,7 @@ end
 
 function love.update(deltaTime)
 	Game:Update(deltaTime)
+	Game:PostUpdate()
 end
 
 function love.draw()

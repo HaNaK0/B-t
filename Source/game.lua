@@ -1,26 +1,43 @@
 require("Source.GameObject")
 require("Source.Components.Sprite")
+require("Source.Components.Camera")
+require("Source.Util.RenderQueue")
 
-Game = {}
-
-Game.objects = {}
+Game = {
+	objects = RenderQueue:New()
+}
 
 function Game:Load(args)
-	local tempObject = GameObject:new(300, 500)
+	local objects = {}
 
+	local tempObject = GameObject:new(0, 0)
 	tempObject.sprite = SpriteFactory:NewImageSprite("Assets/enviroment/rpgTile029.png")
+	table.insert(objects, tempObject)
 
-	Game.objects["test"] = tempObject
+	local cameraObject = GameObject:new(0, 0)
+	cameraObject.camera = Camera:New(true, 0, 0)
+	self.currentCamera = cameraObject.camera
+	table.insert(objects, cameraObject)
+
+	Game.objects:AddObjects(objects)
 end
 
 function Game:Update(deltaTime)
-	for name, object in pairs(self.objects) do
+	for index, object in ipairs(self.objects) do
 		object:Update(deltaTime)
 	end
 end
 
+function Game:PostUpdate()
+	for index, object in ipairs(self.objects) do
+		object:PostUpdate()
+	end
+end
+
 function Game:Draw()
-	for name, object in pairs(self.objects) do
+	self.currentCamera:SetAsCurrent()
+
+	for index, object in ipairs(self.objects) do
 		object:Draw()
 	end
 end

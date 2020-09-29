@@ -18,7 +18,10 @@ function GameObject:new(xPos, yPos)
 
 	local newObject = {
 		transform = tempTransform,
-		components = {}
+		components = {},
+		events = {
+			postUpdate = {}
+		}
 	}
 
 	setmetatable(newObject, GameObject.objectMetaTable)
@@ -27,8 +30,12 @@ end
 
 function GameObject:AddComponent(name, component)
 	assert(type(component) == "table", "trying to add " .. name .. " as a component but it's a " .. type(component) .. " components need to be tables")
-	self.components["name"] = component
+	self.components[name] = component
 	component.parent = self
+
+	if component.PostUpdate ~= nil then
+		self.events.postUpdate[name] = component
+	end
 end
 
 function GameObject:Index(name)
@@ -48,6 +55,12 @@ function GameObject:Update(deltaTime)
 		if component.Update ~= nil then
 			component:Update(deltaTime)
 		end
+	end
+end
+
+function GameObject:PostUpdate()
+	for name,component in pairs(self.events.postUpdate) do
+		component:PostUpdate()
 	end
 end
 
