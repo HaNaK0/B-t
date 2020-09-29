@@ -1,5 +1,5 @@
-require("Game.GameObject")
-require("Game.Components.Sprite")
+require("Source.GameObject")
+require("Source.Components.Sprite")
 
 Game = {}
 
