@@ -10,11 +10,15 @@ function GameObject:new(xPos, yPos)
 		scale = {
 			x = 1,
 			y = 1
-		}
+		},
+
+		rotation = 0,
+		z = 0
 	}
 
 	local newObject = {
-		transform = tempTransform
+		transform = tempTransform,
+		components = {}
 	}
 
 
@@ -34,21 +38,21 @@ function GameObject:AddComponent(name, component)
 end
 
 function GameObject:Index(name)
-	return GameObject[name] or self.components[name]
+	return rawget(GameObject, name) or rawget(self, name) or self.components[name]
 end
 
 function GameObject:Draw()
-	if self.drawable == nil then
-		return
+	for name,component in pairs(self.components) do
+		if component.Draw ~= nil then
+			component:Draw()
+		end
 	end
-	
-	love.graphics.draw(self.drawable, self.transform.position.x, self.transform.position.y, self.transform.rotation, self.transform.scale.x, self.transform.scale.y)
 end
 
 function GameObject:Update(deltaTime)
 	for name, component in pairs(self.components) do
 		if component.Update ~= nil then
-			component.Update(deltaTime)
+			component:Update(deltaTime)
 		end
 	end
 end
