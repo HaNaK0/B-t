@@ -8,7 +8,7 @@ Game.objects = {}
 function Game:Load(args)
 	local tempObject = GameObject:new(300, 500)
 
-	tempObject.sprite = SpriteFactory:NewImageSprite("Game/Assets/enviroment/rpgTile029.png")
+	tempObject.sprite = SpriteFactory:NewImageSprite("Assets/enviroment/rpgTile029.png")
 
 	Game.objects["test"] = tempObject
 end
