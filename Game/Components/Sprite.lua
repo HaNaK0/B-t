@@ -3,6 +3,7 @@ SpriteFactory = {}
 --Setup meta table
 SpriteFactory.SpriteMetaTable = {}
 SpriteFactory.SpriteMetaTable.__index = {}
+SpriteFactory.SpriteMetaTable.__name = "Sprite"
 
 local spriteIndex = SpriteFactory.SpriteMetaTable.__index
 function spriteIndex:Draw()
@@ -15,6 +16,14 @@ end
 function SpriteFactory:NewImageSprite(imagePath)
     local newSprite = {}
     newSprite.drawable = love.graphics.newImage(imagePath)
+
+    setmetatable(newSprite, self.SpriteMetaTable)
+    return newSprite
+end
+
+function  SpriteFactory:NewSpriteFromDrawable(drawable)
+    local newSprite = {}
+    newSprite.drawable = drawable
 
     setmetatable(newSprite, self.SpriteMetaTable)
     return newSprite

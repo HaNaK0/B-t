@@ -21,13 +21,7 @@ function GameObject:new(xPos, yPos)
 		components = {}
 	}
 
-
-	local newObjectMt = {}
-
-	newObjectMt.__index = GameObject.Index
-	newObjectMt.__newindex = GameObject.AddComponent
-
-	setmetatable(newObject, newObjectMt)
+	setmetatable(newObject, GameObject.objectMetaTable)
 	return newObject
 end
 
@@ -56,6 +50,12 @@ function GameObject:Update(deltaTime)
 		end
 	end
 end
+
+GameObject.objectMetaTable = {
+	__index = GameObject.Index,
+	__newindex = GameObject.AddComponent,
+	__name = "GameObject"
+}
 
 local gameObjectMetaTable = {}
 
