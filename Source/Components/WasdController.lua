@@ -25,7 +25,6 @@ function WasdController:Update(deltaTime)
     end
     if love.keyboard.isDown("s") then
         parentTransform.position.y = parentTransform.position.y + self.speed * deltaTime
-        print(parentTransform.position.y)
     end
 
 end

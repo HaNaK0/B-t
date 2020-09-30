@@ -19,13 +19,12 @@ function Camera:New(targetingScreen, width, height)
 end
 
 function Camera:SetAsCurrent()
+
 	love.graphics.setCanvas(self.canvas)
-	love.graphics.applyTransform(self.transform)
 end
 
 function Camera:PostUpdate()
 	local parentTransform = self.parent.transform
-	Debug.DebugText:AddDebugText("Camera Position",self.parent.transform.position.x .. "," .. self.parent.transform.position.y)
 
 	self.transform:setTransformation( parentTransform.x, parentTransform.y, parentTransform.rotation, self.scale.x, self.scale.y, 0, 0, 0, 0)
 end
