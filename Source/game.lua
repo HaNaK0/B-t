@@ -19,7 +19,7 @@ function Game:Load(args)
 	local cameraObject = GameObject:New(0, 0)
 	cameraObject.camera = Camera:New(true, 0, 0)
 	self.currentCamera = cameraObject.camera
-	cameraObject.controller = WasdController:New(10)
+	cameraObject.controller = WasdController:New(50)
 	table.insert(objects, cameraObject)
 
 	Game.objects:AddObjects(objects)
