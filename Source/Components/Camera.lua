@@ -23,6 +23,7 @@ function Camera:SetAsCurrent()
 end
 
 function Camera:PostUpdate()
+	print("PostUpdate")
 	local parentTransform = self.parent.transform
 
 	self.transform:setTransformation( parentTransform.x, parentTransform.y, parentTransform.rotation, self.scale.x, self.scale.y, 0, 0, 0, 0)

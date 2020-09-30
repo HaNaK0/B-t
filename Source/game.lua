@@ -1,6 +1,8 @@
 require("Source.GameObject")
 require("Source.Components.Sprite")
 require("Source.Components.Camera")
+require("Source.Components.WasdController")
+
 require("Source.Util.RenderQueue")
 
 Game = {
@@ -10,13 +12,14 @@ Game = {
 function Game:Load(args)
 	local objects = {}
 
-	local tempObject = GameObject:new(0, 0)
+	local tempObject = GameObject:New(0, 0)
 	tempObject.sprite = SpriteFactory:NewImageSprite("Assets/enviroment/rpgTile029.png")
 	table.insert(objects, tempObject)
 
-	local cameraObject = GameObject:new(0, 0)
+	local cameraObject = GameObject:New(0, 0)
 	cameraObject.camera = Camera:New(true, 0, 0)
 	self.currentCamera = cameraObject.camera
+	cameraObject.controller = WasdController:New(10)
 	table.insert(objects, cameraObject)
 
 	Game.objects:AddObjects(objects)

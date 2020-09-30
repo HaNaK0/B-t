@@ -1,6 +1,6 @@
 GameObject = {}
 
-function GameObject:new(xPos, yPos)
+function GameObject:New(xPos, yPos)
 	local tempTransform = {
 		position = {
 			x = xPos, 
