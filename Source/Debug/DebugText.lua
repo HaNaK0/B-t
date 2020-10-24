@@ -58,7 +58,8 @@ function debugText:Draw()
 		love.graphics.setColor(1, 1, 1, self:intensity(love.timer.getTime() - string.timeStamp))
     	love.graphics.draw(string.text, self.position.x, self.position.y + string.text:getFont():getHeight() * i)
     	i = i + 1
-	end
+    end
+    love.graphics.reset()
 	love.graphics.pop()
 end
 

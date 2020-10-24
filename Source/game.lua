@@ -12,10 +12,7 @@ Game = {
 	window = require("Source.Util.GameWindow")
 }
 
-
-
 function Game:Load(args)
-
 	local objects = {}
 
 	local tempObject = GameObject:New(0, 0)
@@ -25,7 +22,8 @@ function Game:Load(args)
 	local cameraObject = GameObject:New(0, 0)
 	cameraObject.camera = Camera:New(true, self.window.width, self.window.height)
 	self.currentCamera = cameraObject.camera
-	cameraObject.controller = WasdController:New(50)
+	cameraObject.controller = WasdController:New(100)
+	cameraObject.sprite = SpriteFactory:NewImageSprite("Assets/enviroment/rpgTile184.png")
 	table.insert(objects, cameraObject)
 
 	Game.objects:AddObjects(objects)
