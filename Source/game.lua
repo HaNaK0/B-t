@@ -9,28 +9,10 @@ require("Source.Debug.DebugText")
 
 Game = {
 	objects = RenderQueue:New(),
-	window = {}
+	window = require("Source.Util.GameWindow")
 }
 
-local window_mt = {}
 
-function window_mt:__index(key)
-	if key == "width" then
-		local width, heigth, flags = love.window.getMode()
-		Debug.DebugText:AddDebugText("Window Get width", width)
-		return width
-	elseif key == "height" then
-		local width, heigth, flags = love.window.getMode()
-		Debug.DebugText:AddDebugText("Window Get height", heigth)
-		return heigth
-	elseif key == "fullscreen" then
-		local width, heigth, flags = love.window.getMode()
-		Debug.DebugText:AddDebugText("Window Get fullscreen", flags.fullscreen)
-		return flags.fullscreen
-	end
-end
-
-setmetatable(Game.window, window_mt)
 
 function Game:Load(args)
 
