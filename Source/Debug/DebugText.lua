@@ -14,7 +14,7 @@ function debugText:Load()
 end
 
 function debugText:AddDebugText(name, string)
-    local actualString = name .. ":" .. string
+    local actualString = name .. ":" .. tostring(string)
 
     if self.strings[name] == nil then
         local timedText = {
@@ -42,12 +42,24 @@ function debugText:Update()
     end
 end
 
+function debugText:intensity(t)
+	local halfTime = self.stayTime / 2
+	if t < halfTime then
+		return 1
+	end
+
+	return 1 - (t - halfTime) / halfTime
+end
+
 function debugText:Draw()
-    local i = 0
-    for name, string in pairs(self.strings) do
-       love.graphics.draw(string.text, self.position.x, self.position.y + string.text:getFont():getHeight() * i)
-       i = i + 1
-    end
+	local i = 0
+	love.graphics.push()
+	for name, string in pairs(self.strings) do
+		love.graphics.setColor(1, 1, 1, self:intensity(love.timer.getTime() - string.timeStamp))
+    	love.graphics.draw(string.text, self.position.x, self.position.y + string.text:getFont():getHeight() * i)
+    	i = i + 1
+	end
+	love.graphics.pop()
 end
 
 return debugText

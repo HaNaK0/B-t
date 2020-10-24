@@ -29,7 +29,16 @@ function WasdController:Update(deltaTime)
     if love.keyboard.isDown("s") then
 		parentTransform.position.y = parentTransform.position.y + self.speed * deltaTime
 		Debug.DebugText:AddDebugText("Key Press:", "S")
-    end
+	end
+	
+	if love.keyboard.isDown("q") then
+		parentTransform.rotation = parentTransform.rotation - (self.speed / 10) * deltaTime
+		Debug.DebugText:AddDebugText("Key Press:", "Q")
+	end
+	if love.keyboard.isDown("e") then
+		parentTransform.rotation = parentTransform.rotation + (self.speed / 10) * deltaTime
+		Debug.DebugText:AddDebugText("Key Press:", "E")
+	end
 
 end
 
