@@ -26,9 +26,7 @@ function Camera:SetAsCurrent()
 	local transform = self.parent.transform
 
 	love.graphics.setCanvas(self.canvas)
-	love.graphics.rotate(transform.rotation)
 	love.graphics.scale(self.scale.x, self.scale.y)
-	-- love.graphics.translate((transform.position.x + self.view.width / 2) * -1, (transform.position.y + self.view.width / 2) * -1)
 	love.graphics.translate(-transform.position.x + self.view.width / 2, -transform.position.y + self.view.height / 2)
 	love.graphics.push()
 end
