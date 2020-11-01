@@ -1,1 +1,26 @@
-StringProperty: 
+StringProperty = string | component; #the actual string property in tiled it can either be a string or a component
+
+string = "\"", {character | " "}, "\"";
+identifier = letter, {letter | digit | "_"};
+letter = "A" | "B" | "C" | "D" | "E" | "F" | "G"
+       | "H" | "I" | "J" | "K" | "L" | "M" | "N"
+       | "O" | "P" | "Q" | "R" | "S" | "T" | "U"
+       | "V" | "W" | "X" | "Y" | "Z" | "a" | "b"
+       | "c" | "d" | "e" | "f" | "g" | "h" | "i"
+       | "j" | "k" | "l" | "m" | "n" | "o" | "p"
+       | "q" | "r" | "s" | "t" | "u" | "v" | "w"
+       | "x" | "y" | "z" ;
+digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
+symbol = "[" | "]" | "{" | "}" | "(" | ")" | "<" | ">"
+       | "'" | '"' | "=" | "|" | "." | "," | ";" ;
+character = letter | digit | symbol | "_" ;
+number = digit, {digit};
+value = string | number| identifier| "nil";
+
+component = luaRequirePath | luaRequirePath, ":", luaFunctionCall; #A game component that will be added to the object to which the property is applied
+luaRequirePath = identifier, {".", identifier}; # The path you would put in the require function in lua
+luaFunctionCall = luaFunctionName, ["(", [argument, {",", argument}], ")"]; # A function that will be called on the table that is returned by require, the result of that function is then stored in the object
+luaFunctionName = identifier; 
+argument = value | identifier, "=", value;
+
+propertyName = identifier, {".", identifier}; # You can set values to a component by using full stops i.e "component.field"
