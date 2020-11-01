@@ -72,11 +72,12 @@
   </data>
  </layer>
  <objectgroup id="4" name="Main">
-  <object id="1" gid="97" x="679.5" y="656.5" width="20" height="38" rotation="180">
+  <object id="1" name="Player" gid="97" x="679.5" y="656.5" width="20" height="38" rotation="180">
    <properties>
     <property name="camera" value="Source.Components.Camera:New(nil, 5, 5)"/>
     <property name="camera.zoom" type="float" value="1"/>
     <property name="controller" value="Source.Components.WasdController:New()"/>
+    <property name="description" value="&quot;Hello&quot;"/>
    </properties>
   </object>
  </objectgroup>
